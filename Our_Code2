@@ -1,0 +1,488 @@
+#include "LedControl.h"0
+#include <SPI.h>
+//#include <binary.h>
+
+LedControl lc  = LedControl(12, 10, 11, 4);
+//hi
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(57600);
+  Serial.println("Running setup");
+
+  for (int board = 3; board >= 0; board--) {
+    lc.shutdown(board, false);
+    lc.setIntensity(board, 7);
+    lc.clearDisplay(board);
+  }
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ bigEye1();
+  delay(200);
+  bigSurprised1();
+  delay(200);
+  bigSurprised2();
+  delay(2000);
+  bigSurprised3();
+  delay(200);
+}
+//0-2 1-3
+void surprise() {
+  bigEye1();
+  delay(200);
+  bigSurprised1();
+  delay(200);
+  bigSurprised2();
+  delay(2000);
+  bigSurprised3();
+  delay(200);
+}
+
+void eyeBlink() {
+  //blinking eyes
+  bigEye1();
+  delay(200);
+  bigEye2();
+  delay(200);
+  bigEye3();
+  delay(500);
+}
+
+void mean() {
+  //drawEye1(0);
+  //drawEye1(1);
+  delay(1000);
+  mean1(0);
+  mean1(1);
+  delay(1000);
+  mean2(0);
+  mean2(1);
+  delay(1000);
+  mean3(0);
+  mean3(1);
+  delay(1000);
+  mean4(0);
+  mean4(1);
+  delay(1000);
+}
+
+void anime() {
+  //drawEye1(0);
+  //drawEye1(1);
+  delay(100);
+  anime1(0);
+  anime1(1);
+  delay(100);
+  anime2(0);
+  anime2(1);
+  delay(100);
+  anime3(0);
+  anime3(1);
+  delay(100);
+  anime4(0);
+  anime4(1);
+  delay(1000);
+}
+
+void anime1(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00111100);
+  lc.setRow(boardIndex, 1, B01000010);
+  lc.setRow(boardIndex, 2, B01000010);
+  lc.setRow(boardIndex, 3, B01000010);
+  lc.setRow(boardIndex, 4, B01010010);
+  lc.setRow(boardIndex, 5, B01011010);
+  lc.setRow(boardIndex, 6, B01000010);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void anime2(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00111100);
+  lc.setRow(boardIndex, 1, B01000010);
+  lc.setRow(boardIndex, 2, B01011010);
+  lc.setRow(boardIndex, 3, B11111111);
+  lc.setRow(boardIndex, 4, B11111111);
+  lc.setRow(boardIndex, 5, B01011010);
+  lc.setRow(boardIndex, 6, B01000010);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void anime3(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00111100);
+  lc.setRow(boardIndex, 1, B01111110);
+  lc.setRow(boardIndex, 2, B01111110);
+  lc.setRow(boardIndex, 3, B01111110);
+  lc.setRow(boardIndex, 4, B01111110);
+  lc.setRow(boardIndex, 5, B01111110);
+  lc.setRow(boardIndex, 6, B01111110);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void anime4(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00111100);
+  lc.setRow(boardIndex, 1, B01111110);
+  lc.setRow(boardIndex, 2, B11101111);
+  lc.setRow(boardIndex, 3, B11000111);
+  lc.setRow(boardIndex, 4, B11101111);
+  lc.setRow(boardIndex, 5, B11111111);
+  lc.setRow(boardIndex, 6, B01111110);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void mean1(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00001100);
+  lc.setRow(boardIndex, 1, B00010010);
+  lc.setRow(boardIndex, 2, B00100010);
+  lc.setRow(boardIndex, 3, B01000010);
+  lc.setRow(boardIndex, 4, B01010010);
+  lc.setRow(boardIndex, 5, B01011010);
+  lc.setRow(boardIndex, 6, B01000010);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void mean2(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00000000);
+  lc.setRow(boardIndex, 1, B00001110);
+  lc.setRow(boardIndex, 2, B00010010);
+  lc.setRow(boardIndex, 3, B00100010);
+  lc.setRow(boardIndex, 4, B01001010);
+  lc.setRow(boardIndex, 5, B01011010);
+  lc.setRow(boardIndex, 6, B01000010);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void mean3(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00000000);
+  lc.setRow(boardIndex, 1, B00000000);
+  lc.setRow(boardIndex, 2, B00011110);
+  lc.setRow(boardIndex, 3, B00101010);
+  lc.setRow(boardIndex, 4, B01001010);
+  lc.setRow(boardIndex, 5, B01001010);
+  lc.setRow(boardIndex, 6, B00111100);
+  lc.setRow(boardIndex, 7, B00000000);
+}
+
+void mean4(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00000000);
+  lc.setRow(boardIndex, 1, B00000000);
+  lc.setRow(boardIndex, 2, B00001110);
+  lc.setRow(boardIndex, 3, B00011010);
+  lc.setRow(boardIndex, 4, B00101010);
+  lc.setRow(boardIndex, 5, B01001010);
+  lc.setRow(boardIndex, 6, B00111100);
+  lc.setRow(boardIndex, 7, B00000000);
+}
+
+void bigMean1() { //unfiished
+  //top right
+  lc.setRow(0, 0, B11110000);
+  lc.setRow(0, 1, B11110000);
+  lc.setRow(0, 2, B00001100);
+  lc.setRow(0, 3, B00001100);
+  lc.setRow(0, 4, B00001100);
+  lc.setRow(0, 5, B00001100);
+  lc.setRow(0, 6, B00001100);
+  lc.setRow(0, 7, B00001100);
+
+
+  //top left
+  lc.setRow(0, 0, B00000000);
+  lc.setRow(0, 1, B00000000);
+  lc.setRow(0, 2, B00000011);
+  lc.setRow(0, 3, B00000011);
+  lc.setRow(0, 4, B00001100);
+  lc.setRow(0, 5, B00001100);
+  lc.setRow(0, 6, B00110000);
+  lc.setRow(0, 7, B00110000);
+
+
+  //bottom right
+  lc.setRow(0, 0, B00001100);
+  lc.setRow(0, 1, B00001100);
+  lc.setRow(0, 2, B11001100);
+  lc.setRow(0, 3, B11001100);
+  lc.setRow(0, 4, B00001100);
+  lc.setRow(0, 5, B00001100);
+  lc.setRow(0, 6, B11110000);
+  lc.setRow(0, 7, B11110000);
+
+  //bottom left
+  lc.setRow(0, 0, B00110011);
+  lc.setRow(0, 1, B00110011);
+  lc.setRow(0, 2, B00110011);
+  lc.setRow(0, 3, B00110011);
+  lc.setRow(0, 4, B00110000);
+  lc.setRow(0, 5, B00110000);
+  lc.setRow(0, 6, B00001111);
+  lc.setRow(0, 7, B00001111);
+
+}
+
+void surprised2(int boardIndex) {
+  lc.setRow(boardIndex, 0, B01111110);
+  lc.setRow(boardIndex, 1, B10000001);
+  lc.setRow(boardIndex, 2, B10000001);
+  lc.setRow(boardIndex, 3, B10000001);
+  lc.setRow(boardIndex, 4, B10010001);
+  lc.setRow(boardIndex, 5, B10011001);
+  lc.setRow(boardIndex, 6, B10000001);
+  lc.setRow(boardIndex, 7, B01111110);
+}
+
+void surprised3(int boardIndex) {
+  lc.setRow(boardIndex, 0, B01111110);
+  lc.setRow(boardIndex, 1, B10000001);
+  lc.setRow(boardIndex, 2, B10000001);
+  lc.setRow(boardIndex, 3, B10110001);
+  lc.setRow(boardIndex, 4, B10110001);
+  lc.setRow(boardIndex, 5, B10111101);
+  lc.setRow(boardIndex, 6, B10111101);
+  lc.setRow(boardIndex, 7, B01111110);
+}
+
+void surprised4(int boardIndex) {
+  lc.setRow(boardIndex, 0, B00111100);
+  lc.setRow(boardIndex, 1, B01000010);
+  lc.setRow(boardIndex, 2, B01000010);
+  lc.setRow(boardIndex, 3, B01110010);
+  lc.setRow(boardIndex, 4, B01110010);
+  lc.setRow(boardIndex, 5, B01111110);
+  lc.setRow(boardIndex, 6, B01111110);
+  lc.setRow(boardIndex, 7, B00111100);
+}
+
+void bigSurprised1() {
+  //top right
+  lc.setRow(2, 0, B11111100);
+  lc.setRow(2, 1, B11111100);
+
+  for (int row = 2; row < 8; row++) {
+    lc.setRow(2, row, B00000011);
+  }
+
+  //top left
+  lc.setRow(3, 0, B00111111);
+  lc.setRow(3, 1, B00111111);
+
+  for (int row = 2; row < 8; row++) {
+    lc.setRow(3, row, B11000000);
+  }
+
+  //bottom right
+  lc.setRow(0, 0, B00000011);
+  lc.setRow(0, 1, B00000011);
+  lc.setRow(0, 2, B11000011);
+  lc.setRow(0, 3, B11000011);
+  lc.setRow(0, 4, B00000011);
+  lc.setRow(0, 5, B00000011);
+  lc.setRow(0, 6, B11111100);
+  lc.setRow(0, 7, B11111100);
+
+  //bottom left
+  lc.setRow(1, 0, B11000011);
+  lc.setRow(1, 1, B11000011);
+  lc.setRow(1, 2, B11000011);
+  lc.setRow(1, 3, B11000011);
+  lc.setRow(1, 4, B11000000);
+  lc.setRow(1, 5, B11000000);
+  lc.setRow(1, 6, B00111111);
+  lc.setRow(1, 7, B00111111);
+}
+
+void bigSurprised2() {
+  //top right
+  lc.setRow(2, 0, B11111100);
+  lc.setRow(2, 1, B11111100);
+
+  for (int row = 2; row < 6; row++) {
+    lc.setRow(2, row, B00000011);
+  }
+
+  lc.setRow(2, 6, B00000011);
+  lc.setRow(2, 7, B00000011);
+
+  //top left
+  lc.setRow(3, 0, B00111111);
+  lc.setRow(3, 1, B00111111);
+
+  for (int row = 2; row < 6; row++) {
+    lc.setRow(3, row, B11000000);
+  }
+
+  lc.setRow(3, 6, B11001111);
+  lc.setRow(3, 7, B11001111);
+
+  //bottom right
+  lc.setRow(0, 0, B00000011);
+  lc.setRow(0, 1, B00000011);
+  lc.setRow(0, 2, B11110011);
+  lc.setRow(0, 3, B11110011);
+  lc.setRow(0, 4, B11110011);
+  lc.setRow(0, 5, B11110011);
+  lc.setRow(0, 6, B11111100);
+  lc.setRow(0, 7, B11111100);
+
+  //bottom left
+  lc.setRow(1, 0, B11001111);
+  lc.setRow(1, 1, B11001111);
+  lc.setRow(1, 2, B11001111);
+  lc.setRow(1, 3, B11001111);
+  lc.setRow(1, 4, B11001111);
+  lc.setRow(1, 5, B11001111);
+  lc.setRow(1, 6, B00111111);
+  lc.setRow(1, 7, B00111111);
+}
+
+void bigSurprised3() {
+  //top right
+  lc.setRow(2, 0, B11110000);
+  lc.setRow(2, 1, B11110000);
+
+  for (int row = 2; row < 8; row++) {
+    lc.setRow(2, row, B00001100);
+  }
+
+  //top left
+  lc.setRow(3, 0, B00001111);
+  lc.setRow(3, 1, B00001111);
+
+  for (int row = 2; row < 6; row++) {
+    lc.setRow(3, row, B00110000);
+  }
+
+  lc.setRow(3, 6, B00111111);
+  lc.setRow(3, 7, B00111111);
+
+  //bottom right
+  lc.setRow(0, 0, B00001100);
+  lc.setRow(0, 1, B00001100);
+  lc.setRow(0, 2, B11111100);
+  lc.setRow(0, 3, B11111100);
+  lc.setRow(0, 4, B11111100);
+  lc.setRow(0, 5, B11111100);
+  lc.setRow(0, 6, B11110000);
+  lc.setRow(0, 7, B11110000);
+
+  //bottom left
+  lc.setRow(1, 0, B00111111);
+  lc.setRow(1, 1, B00111111);
+  lc.setRow(1, 2, B00111111);
+  lc.setRow(1, 3, B00111111);
+  lc.setRow(1, 4, B00111111);
+  lc.setRow(1, 5, B00111111);
+  lc.setRow(1, 6, B00001111);
+  lc.setRow(1, 7, B00001111);
+}
+
+void bigEye1() {
+
+  lc.setRow(3, 0, B00001111);
+  lc.setRow(3, 1, B00001111);
+
+  for (int row = 2; row < 8; row++) {
+    lc.setRow(3, row, B00110000);
+  }
+
+  lc.setRow(2, 0, B11110000);
+  lc.setRow(2, 1, B11110000);
+
+  for (int row = 2; row < 8; row++) {
+    lc.setRow(2, row, B00001100);
+  }
+//0-2 1-3
+
+  lc.setRow(1, 0, B00110011);
+  lc.setRow(1, 1, B00110011);
+  lc.setRow(1, 2, B00110011);
+  lc.setRow(1, 3, B00110011);
+  lc.setRow(1, 4, B00110000);
+  lc.setRow(1, 5, B00110000);
+  lc.setRow(1, 6, B00001111);
+  lc.setRow(1, 7, B00001111);
+
+  lc.setRow(0, 0, B00001100);
+  lc.setRow(0, 1, B00001100);
+  lc.setRow(0, 2, B11001100);
+  lc.setRow(0, 3, B11001100);
+  lc.setRow(0, 4, B00001100);
+  lc.setRow(0, 5, B00001100);
+  lc.setRow(0, 6, B11110000);
+  lc.setRow(0, 7, B11110000);
+
+}
+
+void bigEye2() {
+
+  //top right
+  for (int row = 0; row < 4; row++) {
+    lc.setRow(2, row, B00000000);
+  }
+
+  lc.setRow(2, 4, B11110000);
+  lc.setRow(2, 5, B11110000);
+  lc.setRow(2, 6, B00001100);
+  lc.setRow(2, 7, B00001100);
+
+  //top left
+  for (int row = 0; row < 4; row++) {
+    lc.setRow(3, row, B00000000);
+  }
+
+  lc.setRow(3, 4, B00001111);
+  lc.setRow(3, 5, B00001111);
+  lc.setRow(3, 6, B00110000);
+  lc.setRow(3, 7, B00110000);
+
+  //bottom right
+  lc.setRow(0, 0, B00001100);
+  lc.setRow(0, 1, B00001100);
+  lc.setRow(0, 2, B11001100);
+  lc.setRow(0, 3, B11001100);
+  lc.setRow(0, 4, B11110000);
+  lc.setRow(0, 5, B11110000);
+  lc.setRow(0, 6, B00000000);
+  lc.setRow(0, 7, B00000000);
+
+  //bottom left
+  lc.setRow(1, 0, B00110011);
+  lc.setRow(1, 1, B00110011);
+  lc.setRow(1, 2, B00110011);
+  lc.setRow(1, 3, B00110011);
+  lc.setRow(1, 4, B00001111);
+  lc.setRow(1, 5, B00001111);
+  lc.setRow(1, 6, B00000000);
+  lc.setRow(1, 7, B00000000);
+}
+
+void bigEye3() {
+
+  //top right and left
+  for (int row = 0; row <= 7; row++) {
+    for (int panel = 2; panel < 4; panel++) {
+      lc.setRow(panel, row, B00000000);
+    }
+  }
+
+  //bottom right
+  lc.setRow(0, 0, B00000000);
+  lc.setRow(0, 1, B00000000);
+
+  for (int row = 2; row < 6; row++) {
+    lc.setRow(0, row, B11110000);
+  }
+
+  lc.setRow(0, 6, B00000000);
+  lc.setRow(0, 7, B00000000);
+
+  //bottom left
+  lc.setRow(1, 0, B00000000);
+  lc.setRow(1, 1, B00000000);
+
+  for (int row = 2; row < 6; row++) {
+    lc.setRow(1, row, B00111111);
+  }
+
+  lc.setRow(1, 6, B00000000);
+  lc.setRow(1, 7, B00000000);
+}
